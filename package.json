@@ -1,0 +1,23 @@
+{
+  "name": "josy",
+  "version": "1.2.0",
+  "description": "JSaltyLens - Professional Photographer",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "author": "Rafael Feliciano",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-image": "^2.9.1",
+    "parcel-plugin-imagemin": "^4.0.2"
+  },
+  "dependencies": {
+    "parcel": "^2.9.1"
+  },
+  "main": "index.js",
+  "keywords": [
+    "JSaltyLens"
+  ]
+}
