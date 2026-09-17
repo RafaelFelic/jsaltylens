@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import { onNavigate } from '$app/navigation';
-	import { page } from '$app/state';
 	import archivo from '@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url';
 	import instrumentSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
 	import appleTouchIcon from '$lib/assets/apple-touch-icon.png';
@@ -12,7 +11,6 @@
 
 	let { children } = $props();
 
-	const overlay = $derived(page.url.pathname === '/');
 	const graph = `<script type="application/ld+json">${JSON.stringify(siteGraph).replaceAll('<', '\\u003c')}</` + 'script>';
 
 	onNavigate((navigation) => {
@@ -37,9 +35,9 @@
 	{@html graph}
 </svelte:head>
 
-<Header {overlay} />
+<Header />
 
-<main id="main" tabindex="-1" class={['outline-none', !overlay && 'pt-(--spacing-header)']}>
+<main id="main" tabindex="-1" class="pt-(--spacing-header) outline-none">
 	{@render children()}
 </main>
 

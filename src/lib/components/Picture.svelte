@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Image } from '$lib/data/types';
+	import { cap } from '$lib/image-cap';
 
 	interface Props {
 		image: Image;
@@ -11,6 +12,7 @@
 		imgClass?: string;
 		transitionName?: string;
 		alt?: string;
+		capped?: boolean;
 	}
 
 	let {
@@ -22,7 +24,8 @@
 		class: className = '',
 		imgClass = '',
 		transitionName,
-		alt
+		alt,
+		capped = false
 	}: Props = $props();
 
 	let element: HTMLImageElement | undefined = $state();
@@ -36,7 +39,8 @@
 </script>
 
 <picture
-	class="picture {fill ? 'absolute inset-0' : 'relative block'} {className}"
+	class="picture {fill ? 'absolute inset-0' : 'relative block'} {capped ? 'cap' : ''} {className}"
+	style={capped ? cap(image.width) : undefined}
 	style:aspect-ratio={fill ? undefined : `${image.width} / ${image.height}`}
 	style:background-color={image.color}
 	style:view-transition-name={transitionName}

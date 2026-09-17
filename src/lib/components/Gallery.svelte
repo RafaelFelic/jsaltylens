@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Image } from '$lib/data/types';
+	import { cap } from '$lib/image-cap';
 	import Picture from './Picture.svelte';
 
 	type GalleryImage = Image & { feature?: boolean };
@@ -65,7 +66,7 @@
 	const name = (index: number) => (transitionIndex === index ? 'lightbox-photo' : undefined);
 
 	const sizes = (ratio: number, sum: number) =>
-		`(min-width: 640px) ${Math.round((ratio / sum) * 100)}vw, ${ratio > 1 ? '100vw' : '60vw'}`;
+		`(min-width: 640px) min(${Math.round((ratio / sum) * 100)}vw, ${Math.round(ratio * 34 * 16)}px), 100vw`;
 </script>
 
 <div class="gallery grid gap-(--gap)">
@@ -74,13 +75,14 @@
 			<a
 				href={href(block.index)}
 				id="photo-{block.index + 1}"
-				class="tile block"
+				class="tile cap block w-full"
+				style={cap(block.image.width)}
 				aria-label={label(block.index)}
 				onclick={(event) => onopen?.(block.index, event)}
 			>
 				<Picture
 					image={block.image}
-					sizes="(min-width: 1760px) 1700px, 100vw"
+					sizes="(min-width: 640px) min(100vw, {block.image.width}px), 100vw"
 					priority={blockIndex === 0}
 					transitionName={name(block.index)}
 					alt=""
@@ -103,7 +105,7 @@
 										{image}
 										sizes={sizes(ratio, row.sum)}
 										class="h-full"
-										priority={blockIndex === 0 && rowIndex === 0 && index < 2}
+										priority={blockIndex === 0 && rowIndex === 0 && index === 0}
 										transitionName={name(index)}
 										alt=""
 									/>
@@ -130,7 +132,9 @@
 	.row {
 		display: flex;
 		gap: var(--gap);
+		width: 100%;
 		max-width: calc(var(--sum) * 34rem);
+		margin-inline: auto;
 	}
 
 	.item {

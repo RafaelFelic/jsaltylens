@@ -79,7 +79,7 @@
 
 	<div class="frame mt-(--spacing-section)">
 		<div class="reveal-image">
-			<Picture image={data.closing} sizes="(min-width: 1760px) 1700px, 100vw" />
+			<Picture image={data.closing} sizes="min(100vw, {data.closing.width}px)" capped />
 		</div>
 	</div>
 </article>

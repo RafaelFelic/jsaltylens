@@ -61,6 +61,7 @@
 							image={view}
 							sizes="(min-width: 1024px) 50vw, 90vw"
 							priority={selected === 0}
+							capped
 							class="mx-auto {selected === 0 ? 'shadow-[0_2px_4px_rgb(0_0_0/0.08),0_24px_50px_-20px_rgb(0_0_0/0.35)]' : ''}"
 						/>
 					</div>

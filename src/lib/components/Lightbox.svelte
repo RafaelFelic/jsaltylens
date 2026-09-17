@@ -143,6 +143,7 @@
 								{image}
 								sizes="100vw"
 								class="box"
+								capped
 								fit="contain"
 								priority={i === index}
 								transitionName={i === index && transitionIndex === index ? 'lightbox-photo' : undefined}

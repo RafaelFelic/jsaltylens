@@ -50,6 +50,8 @@ Photos are referenced by an id that matches their path inside `src/lib/assets/ph
 
 Export JPEGs at about **2400–2560px on the long edge**. Larger files only slow the build down.
 
+A photo is never displayed wider than its file allows: at most its own pixel width on standard screens, and its width ÷ 1.5 on retina screens and phones (`src/lib/image-cap.ts`). Low-resolution files therefore appear smaller on the page instead of looking pixelated, so export at full size whenever you can.
+
 ### Add a photo to an existing series
 
 1. Save the file, for example `src/lib/assets/photos/waves/22.jpg`.

@@ -11,8 +11,6 @@
 	--line: #d8d2c7;
 	--field: #8a847a;
 	--sea: #0f5c5f;
-	--on-photo: #fbfaf7;
-	--scrim: rgb(10 10 9 / 0.55);
 	color-scheme: light;
 }
 
@@ -48,7 +46,6 @@
 	--color-line: var(--line);
 	--color-field: var(--field);
 	--color-sea: var(--sea);
-	--color-on-photo: var(--on-photo);
 
 	--font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
 	--font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
@@ -171,6 +168,17 @@
 
 	.link-rule:hover {
 		text-decoration-color: currentColor;
+	}
+
+	.cap {
+		max-width: var(--cap-1x, none);
+		margin-inline: auto;
+	}
+
+	@media (min-resolution: 1.5dppx) {
+		.cap {
+			max-width: var(--cap-hd, none);
+		}
 	}
 }
 
