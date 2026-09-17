@@ -1,17 +1,36 @@
 {
-  "name": "josy",
-  "version": "1.2.0",
-  "description": "JSaltyLens - Professional Photographer",
-  "scripts": {},
-  "author": "Rafael Feliciano",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "nodemailer": "^6.9.13"
-  },
-  "keywords": [
-    "JSaltyLens"
-  ]
+	"name": "jsaltylens",
+	"private": true,
+	"version": "2.0.0",
+	"type": "module",
+	"description": "JSaltyLens — photography and fine art prints by Josy Menezes, Noosa, QLD",
+	"author": "Rafael Feliciano",
+	"scripts": {
+		"dev": "bun run photos && vite dev",
+		"build": "bun run photos && vite build",
+		"preview": "vite preview",
+		"photos": "bun scripts/photos.ts",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "bun run photos && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+	},
+	"devDependencies": {
+		"@fontsource-variable/archivo": "^5.3.0",
+		"@fontsource/instrument-serif": "^5.3.0",
+		"@sveltejs/adapter-vercel": "^6.3.3",
+		"@sveltejs/enhanced-img": "^0.11.0",
+		"@sveltejs/kit": "^2.63.0",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@tailwindcss/vite": "^4.3.0",
+		"@types/nodemailer": "^8.0.2",
+		"sharp": "^0.35.4",
+		"svelte": "^5.56.1",
+		"svelte-check": "^4.6.0",
+		"tailwindcss": "^4.3.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.16"
+	},
+	"dependencies": {
+		"nodemailer": "^10.0.10"
+	}
 }
