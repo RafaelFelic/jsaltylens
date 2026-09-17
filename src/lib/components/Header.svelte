@@ -5,9 +5,14 @@
 	import Signature from './Signature.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
 
-	let scrollY = $state(0);
+	let { overlay = false }: { overlay?: boolean } = $props();
 
-	const raised = $derived(scrollY > 8);
+	let scrollY = $state(0);
+	let innerHeight = $state(800);
+	let menuOpen = $state(false);
+
+	const onPhoto = $derived(overlay && scrollY < innerHeight - 96 && !menuOpen);
+	const raised = $derived(!onPhoto && scrollY > 8);
 
 	const left = navigation.slice(0, 3);
 	const right = navigation.slice(3);
@@ -16,7 +21,7 @@
 		page.url.pathname === href || page.url.pathname.startsWith(`${href}/`) ? 'page' : undefined;
 </script>
 
-<svelte:window bind:scrollY />
+<svelte:window bind:scrollY bind:innerHeight />
 
 <a
 	href="#main"
@@ -25,7 +30,11 @@
 	Skip to content
 </a>
 
-<header class="header fixed inset-x-0 top-0 z-50 h-(--spacing-header)" class:raised>
+<header
+	class="header fixed inset-x-0 top-0 z-50 h-(--spacing-header)"
+	class:on-photo={onPhoto}
+	class:raised
+>
 	<div class="frame grid h-full grid-cols-[1fr_auto_1fr] items-center">
 		<nav aria-label="Primary" class="hidden lg:block">
 			<ul class="flex gap-9">
@@ -52,7 +61,7 @@
 				</ul>
 			</nav>
 			<ThemeToggle class="hidden p-2 lg:inline-flex" />
-			<MobileMenu />
+			<MobileMenu bind:open={menuOpen} />
 		</div>
 	</div>
 </header>
@@ -61,8 +70,28 @@
 	.header {
 		color: var(--ink);
 		transition:
+			color 400ms var(--ease-in-out-soft),
 			background-color 400ms var(--ease-in-out-soft),
 			box-shadow 400ms var(--ease-in-out-soft);
+	}
+
+	.header::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 -2rem;
+		z-index: -1;
+		background: linear-gradient(rgb(0 0 0 / 0.38), transparent);
+		opacity: 0;
+		transition: opacity 400ms var(--ease-in-out-soft);
+		pointer-events: none;
+	}
+
+	.header.on-photo {
+		color: var(--on-photo);
+	}
+
+	.header.on-photo::before {
+		opacity: 1;
 	}
 
 	.header.raised {

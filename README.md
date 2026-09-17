@@ -52,6 +52,8 @@ Export JPEGs at about **2400–2560px on the long edge**. Larger files only slow
 
 A photo is never displayed wider than its file allows: at most its own pixel width on standard screens, and its width ÷ 1.5 on retina screens and phones (`src/lib/image-cap.ts`). Low-resolution files therefore appear smaller on the page instead of looking pixelated, so export at full size whenever you can.
 
+The one exception is the full-screen slideshow on the home page (`src/lib/data/home.ts`), which always fills the screen. Use the highest-resolution landscape photos you have there (ideally 2560px wide or more), otherwise they look soft on large and retina screens.
+
 ### Add a photo to an existing series
 
 1. Save the file, for example `src/lib/assets/photos/waves/22.jpg`.
