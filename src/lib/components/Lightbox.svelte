@@ -44,7 +44,6 @@
 
 	onMount(() => {
 		if (!dialog) return;
-		if (dialog.open) dialog.close();
 		dialog.showModal();
 		return () => {
 			requested = true;
@@ -100,7 +99,7 @@
 
 <dialog
 	bind:this={dialog}
-	open={ssrOpen || undefined}
+	data-page={ssrOpen ? '' : undefined}
 	class="lightbox fixed inset-0 z-[80] m-0 h-dvh max-h-none w-full max-w-none bg-[#0b0b0a] p-0 text-[#ece7df]"
 	aria-label="{title}, photo {index + 1} of {count}"
 	oncancel={close}
@@ -179,6 +178,10 @@
 
 	.lightbox:not([open]) {
 		display: none;
+	}
+
+	:global(html:not(.js)) .lightbox[data-page] {
+		display: block;
 	}
 
 	.lightbox::backdrop {
