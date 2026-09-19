@@ -58,6 +58,7 @@
 		<div class="label mt-20 flex flex-wrap justify-between gap-4 border-t border-line pt-6 text-muted">
 			<p>© {year} {site.name}</p>
 			<p>Photography by {site.photographer}</p>
+			<p>Designed &amp; built by STRATIG DIGITAL</p>
 		</div>
 	</div>
 </footer>
