@@ -3,7 +3,11 @@ import { describePhoto } from '$lib/data/photos';
 import type { Image, Picture, PhotoId } from '$lib/data/types';
 
 const photoModules = import.meta.glob<Picture>(
-	['/src/lib/assets/photos/**/*.jpg', '!/src/lib/assets/photos/mockups/**'],
+	[
+		'/src/lib/assets/photos/**/*.jpg',
+		'/src/lib/assets/photos/**/*.png',
+		'!/src/lib/assets/photos/mockups/**'
+	],
 	{ eager: true, import: 'default', query: { enhanced: true, w: '360;540;768;1080;1600;2400' } }
 );
 
@@ -23,7 +27,7 @@ const metadata = meta as Record<string, { width: number; height: number; color: 
 
 const pictures = new Map<PhotoId, Picture>(
 	Object.entries({ ...photoModules, ...mockupModules }).map(([path, picture]) => [
-		path.replace('/src/lib/assets/photos/', '').replace(/\.jpg$/, ''),
+		path.replace('/src/lib/assets/photos/', '').replace(/\.(?:jpg|png)$/, ''),
 		picture
 	])
 );
